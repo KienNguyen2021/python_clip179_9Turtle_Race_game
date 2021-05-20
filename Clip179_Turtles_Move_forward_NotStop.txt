@@ -1,0 +1,63 @@
+# Create Turtle race, many turtles with different color
+# instance inside object
+# Positional arguments : def my_function(a,b,c)
+import turtle
+from turtle import Turtle, Screen
+
+import random
+
+# tim = Turtle() : moved down
+
+is_race_on = False     #  this let user keep betting when the race is ON
+screen = Screen()
+
+screen.setup(width=500, height=400)  # positional argument : x=500, y = 400
+
+
+
+# turtle.textinput(title, prompt) : title(string), prompt(string)-->pop up a dialog window for input of string
+user_bet = screen.textinput(title="Make your bet", prompt=" Which turtle will win the race ? Enter a color :")
+
+print(user_bet)
+
+new_turtle = Turtle()
+# the Method: turtle.goto(x, y =None). if height =400 : from middle (0,0)- go up : +200, godown = -200
+# turtle.goto(x, y =None). if width =500 : from middle (0,0)- go right : +250, goleft = -250
+colors = ["red","orange","yellow","green","blue","purple"]    # 6 colors for 6 turtles
+# 6 turtles at the same position at x, but y is different :
+y_positions = [-70,-40,-10, 20, 50, 80]
+
+# Make an empty list of turtles at beginning, then use Append (added turtles to this list later :
+all_turtles = []
+
+# use For Loop to go through the array Color :
+for turtle_index in range(0, 6):
+
+   # create new turtle below has different states (color :
+   new_turtle = Turtle(shape="turtle")     #  pass one parameter appearance : 'shape' of the turtle
+   new_turtle.penup()               # this method : no drawing when the turtle move
+   new_turtle.color(colors[turtle_index])     # this method gives 6 colors to 6 turtles
+# tim.goto(x=-250, y=-100)  # if x =-250, the turtle rans out of the screen, so x =-230
+  #tim.goto(x=-250, y=-100) if  y position = 100--> 6 turtles start at the same position, so :
+
+   new_turtle.goto(x=-230, y=y_positions[turtle_index])    # position y to pass the turtle index of each item of the array
+
+ # Now, use Append to add new turtles to  empty all_turtles above :
+   all_turtles.append(new_turtle)
+  # tim.shape("turtle")  # change the turtle appearance at your own preference
+
+#Create a random of numbers from 0 to 10 for any turtle move forward, and repeat it many time :
+
+
+if user_bet :
+  is_race_on = True   # different from False---> the race is ON
+
+while is_race_on:
+
+    for turtle in all_turtles:  # this For Loop for the moving of each turtle in all_turtle
+       rand_distance = random.randint(0,10)   # the length of the race road
+       turtle.forward(rand_distance)
+
+
+screen.exitonclick()
+
